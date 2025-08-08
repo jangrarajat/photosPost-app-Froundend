@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { HiPlus } from "react-icons/hi";
 import { BsCloudUploadFill } from "react-icons/bs";
-
 import { CiCircleRemove } from "react-icons/ci";
 import { FaHome } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { CiLogin } from "react-icons/ci";
-
+import PageLaoder from "./Components/PageLaoder"
 
 
 import './App.css'
@@ -16,6 +15,7 @@ import axios from 'axios';
 
 
 function App() {
+  const [pageLaoder, setPageLaoder] = useState(false)
   const [searchBar, setSearchBar] = useState(false)
   const [upLaodPhotoLoading, setUpLaodPhotoLoading] = useState(false)
   const [postDiv, setPostDiv] = useState(false)
@@ -24,7 +24,7 @@ function App() {
   const [sucMsg, setSucMsg] = useState(false)
   const [title, setTitle] = useState("add title")
   const [allData, setAllData] = useState()
-  const [searchkey, setSearchkey] = useState("")
+  const [searchkey, setSearchkey] = useState()
 
 
 
@@ -33,47 +33,48 @@ function App() {
   //  get only searched data 
 
   const searchedData = async () => {
-    if (!searchkey) return "searchkey is empty"
-    
+    if (!searchkey) return console.log("searchkey is empty")
+
     try {
-      const res = await axios.get(`http://localhost:3000/api/photos?q=${encodeURIComponent(searchkey)}`)
-      // const newRes = await res.json();
-  
-      
-    if(res.data.message.length !==0 ){
-      const myAllPostes = res.data.message.length === 1 ? (
-        <div className="w-full">
-          {res.data.message.map((post) => (
-            <div key={post._id} className=' w-fit   rounded-lg'>
-              <img
-                src={post.photo}
-                className="rounded-xl w-full "
-                alt="postes"
-              />
-              <div><p className='text-white font-extralight'>{post.title}</p></div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="columns-3 md:columns-9 gap-4">
-          {res.data.message.map((post) => (
-            <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg">
-              <img
-                src={post.photo}
-                className="w-full rounded-lg"
-                alt="postes"
-              />
-            </div>
-          ))}
-        </div>
-      );
+      setPageLaoder(true)
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/photos?q=${encodeURIComponent(searchkey)}`)
 
-      setAllData(myAllPostes)
 
-     
 
-    }
-      
+      if (res.data.message.length !== 0) {
+        const myAllPostes = res.data.message.length === 1 ? (
+          <div className="w-full">
+            {res.data.message.map((post) => (
+              <div key={post._id} className=' w-fit   rounded-lg'>
+                <img
+                  src={post.photo}
+                  className="rounded-xl w-full "
+                  alt="postes"
+                />
+                <div><p className='text-white font-extralight'>{post.title}</p></div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="columns-3 md:columns-9 gap-4">
+            {res.data.message.map((post) => (
+              <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg">
+                <img
+                  src={post.photo}
+                  className="w-full rounded-lg"
+                  alt="postes"
+                />
+              </div>
+            ))}
+          </div>
+        );
+
+        setAllData(myAllPostes)
+
+
+
+      }
+      setPageLaoder(false)
     } catch (error) {
       console.log("serch daata  get error", error.message)
       console.log(searchkey)
@@ -85,8 +86,11 @@ function App() {
   //  get all data from mongoDb 
 
   const getData = async () => {
+
     try {
-      const res = await fetch('http://localhost:3000/api/user')
+
+      setPageLaoder(true)
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user`)
       const data = await res.json();
 
       const myAllPostes = data.length === 1 ? (
@@ -114,9 +118,11 @@ function App() {
             </div>
           ))}
         </div>
-      );
-      setAllData(myAllPostes)
 
+      );
+      setPageLaoder(false)
+      setAllData(myAllPostes)
+      // console.log(process.env.REACT_APP_API_URL)
     } catch (error) {
       console.log("  get all data error", error.message)
       console.log(searchkey)
@@ -132,7 +138,7 @@ function App() {
 
     try {
 
-      const res = await axios.post('http://localhost:3000/api/user', {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user`, {
         title: title,
         photo: imageUrl,
       })
@@ -151,19 +157,17 @@ function App() {
   // delete photo 
 
   const deletePhoto = async (id, title, photo) => {
-    console.log(id)
-    console.log(title)
-    console.log(photo)
+
     try {
-      const res = await axios.delete(`http://localhost:3000/api/user/${id}`, {
+      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/user/${id}`, {
         data: {
           title: title,
           photo: photo,
         },
       })
       getData();
-      const deleteRes = await res.json()
-      console.log(deleteRes)
+
+
     } catch (error) {
       console.log("delete error", error.message)
     }
@@ -212,7 +216,7 @@ function App() {
       setImageUrl(data.secure_url);
       setGenrateUrlLoading(false)
       successMessage()
-  
+
     } catch (err) {
       console.error("Upload failed:", err);
     }
@@ -220,7 +224,7 @@ function App() {
 
 
   useEffect(() => {
-    console.log(imageUrl)
+
     getData()
   }, [imageUrl])
 
@@ -231,6 +235,7 @@ function App() {
     searchedData()
     setSearchBar(false)
     setPostDiv(false)
+
   }
 
   function homeBtn() {
@@ -240,12 +245,21 @@ function App() {
     setPostDiv(false)
   }
 
+  function serchBtn() {
+    searchBar ? setSearchBar(false) : setSearchBar(true)
+    setPostDiv(false)
+  }
 
-
+  function newPostBtn() {
+    postDiv ? setPostDiv(false) : setPostDiv(true)
+    setSearchBar(false)
+  }
 
 
   return (
     <>
+
+
 
 
       {sucMsg ? (
@@ -275,8 +289,8 @@ function App() {
 
             className='gap-7 p-3 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center px-3 rounded-full text-white'>
             <FaHome className=' cursor-pointer' onClick={homeBtn} />
-            <FaSearch className={searchBar ? "animate-bounce" : "animate-none"} onClick={() => searchBar ? setSearchBar(false) : setSearchBar(true)} />
-            <HiPlus className={postDiv ? "animate-bounce cursor-pointer" : "animate-none cursor-pointer"} onClick={() => postDiv ? setPostDiv(false) : setPostDiv(true)} />
+            <FaSearch className={searchBar ? "animate-bounce" : "animate-none"} onClick={serchBtn} />
+            <HiPlus className={postDiv ? "animate-bounce cursor-pointer" : "animate-none cursor-pointer"} onClick={newPostBtn} />
 
           </div>
         </div>
@@ -354,7 +368,7 @@ function App() {
               className="   w-full max-w-sm mt-3  rounded-lg cursor-pointer"
             >
 
-              <input type="text" id='title' placeholder='Enter title'
+              <input type="text" id='title' placeholder='Some keyword '
                 onChange={(e) => setTitle(e.target.value)}
                 className='h-10 w-full font-thin mt-4 px-2 rounded-lg  bg-gray-700 text-white'
               />
@@ -391,12 +405,19 @@ function App() {
 
       {/* photos section  */}
 
-      <div className=' flex flex-row flex-wrap   absolute  p-5 '   >
-        {allData}
-      </div>
 
 
 
+      {pageLaoder ?
+        (<>
+
+          <PageLaoder />
+        </>)
+        : (<>
+          <div className=' flex flex-row flex-wrap   absolute  p-5 '   >
+            {allData}
+          </div>
+        </>)}
 
 
 
