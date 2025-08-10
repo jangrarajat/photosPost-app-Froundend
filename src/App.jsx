@@ -311,7 +311,7 @@ function App() {
          justify-between
          px-5
          items-center 
-         h-14
+         h-fit
          top-0
 
      //  desktop
@@ -344,7 +344,7 @@ function App() {
          flex 
          justify-around
          items-center 
-         h-14
+         h-12
          bottom-0
 
      //  desktop
@@ -398,7 +398,26 @@ function App() {
 
 
 
+      {/* menu bar  */}
 
+
+
+      <Transition
+        show={menuOption}
+        enter="transition ease duration-500 transform"
+        enterFrom="-translate-y-full opacity-0"
+        enterTo="translate-y-0 opacity-100"
+        leave="transition ease duration-200 transform"
+        leaveFrom="translate-y-0 opacity-100"
+        leaveTo="-translate-y-full opacity-0"
+      >
+        <div className=' text-white p-4 h-[87%]  flex flex-col items-center justify-center   w-full   backdrop-blur z-20  fixed top-12 left-1/2 transform -translate-x-1/2 '>
+
+         
+          <p className='font-extralight my-5 cursor-pointer'>About</p>
+          <p className='font-extralight my-5 cursor-pointer'>Login</p>
+        </div>
+      </Transition>
 
 
       {/* search bar  start */}
@@ -415,7 +434,7 @@ function App() {
         leaveFrom="translate-y-0 opacity-100"
         leaveTo="-translate-y-full opacity-0"
       >
-        <div className=' text-white p-4 min-h-[90%] md:h-fit md:rounded-xl w-full md:w-[70%] bg-gradient-to-br from-blue-900 via-gray-800 to-black z-40  fixed md:top-10 left-1/2 transform -translate-x-1/2 '>
+        <div className=' text-white p-4 min-h-[95%] md:h-fit md:rounded-xl w-full md:w-[70%]  backdrop-blur z-40  fixed md:top-10 left-1/2 transform -translate-x-1/2 '>
 
           <input
             onChange={(e) => setSearchkey(e.target.value)}
@@ -535,7 +554,7 @@ function App() {
 
 
 
-          <div className='  md:w-[97%] md:ml-[3%] absolute  md:p-5 p-1 bg-white'   >
+          <div className='  md:w-[97%] md:ml-[3%] absolute top-12 md:p-5 p-1 bg-white'   >
 
             {allData}
           </div>
