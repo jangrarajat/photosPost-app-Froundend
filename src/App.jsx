@@ -16,7 +16,7 @@ import axios from 'axios';
 
 
 function App() {
-  
+
   const [menuOption, setMenuOption] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [pageLaoder, setPageLaoder] = useState(false)
@@ -62,16 +62,16 @@ function App() {
             {res.data.message.map((post) => (
               <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg" >
                 <img
-                 
+
                   src={post.photo}
                   className="w-full rounded-lg"
                   alt="postes"
                 />
-                
+
               </div>
             ))}
 
-        
+
           </div>
         );
 
@@ -121,7 +121,7 @@ function App() {
                 src={post.photo}
                 className="w-full rounded-lg"
                 alt="postes"
-                 onClick={()=>{console.log(post._id)}}
+                onClick={() => { console.log(post._id) }}
               />
             </div>
           ))}
@@ -359,10 +359,21 @@ function App() {
           md:justify-start
           md:flex-col
        '>
-
-        <FaHome className=' cursor-pointer' onClick={homeBtn} />
-        <HiPlus className={postDiv ? "animate-bounce cursor-pointer" : "animate-none cursor-pointer"} onClick={newPostBtn} />
-        <FaSearch className={searchBar ? "animate-bounce" : "animate-none"} onClick={serchBtn} />
+        <img src="https://i.pinimg.com/736x/6e/ad/91/6ead912ceb43c93b8e189d1eb802845f.jpg" className='w-11 rounded-full p-1 hidden md:flex' alt="logo" />
+        <button
+          className=' w-[20%] h-[90%] flex items-center justify-center'
+          onClick={homeBtn}> <FaHome className=' cursor-pointer' />
+        </button>
+        <button
+          className=' w-[20%] h-[90%] flex items-center justify-center'
+          onClick={newPostBtn}>
+          <HiPlus className={postDiv ? "animate-bounce cursor-pointer" : "animate-none cursor-pointer"} />
+        </button>
+        <button
+          className=' w-[20%] h-[90%] flex items-center justify-center'
+         onClick={serchBtn}>
+        <FaSearch className={searchBar ? "animate-bounce" : "animate-none"}  />
+        </button>
 
         {/* <button className='bg-gray-700 text-white p-1' onClick={() => setIsOpen(!isOpen)}>ok</button> */}
 
@@ -483,7 +494,7 @@ function App() {
           <br />
           <br />
           <button
-            
+
             onClick={() => {
               postNewPhoto()
               setUpLaodPhotoLoading(true)
