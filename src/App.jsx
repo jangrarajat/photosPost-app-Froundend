@@ -4,8 +4,9 @@ import { BsCloudUploadFill } from "react-icons/bs";
 import { CiCircleRemove } from "react-icons/ci";
 import { FaHome } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-import { CiLogin } from "react-icons/ci";
 import PageLaoder from "./Components/PageLaoder"
+import { Transition } from '@headlessui/react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 import './App.css'
@@ -15,6 +16,9 @@ import axios from 'axios';
 
 
 function App() {
+  
+  const [menuOption, setMenuOption] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [pageLaoder, setPageLaoder] = useState(false)
   const [searchBar, setSearchBar] = useState(false)
   const [upLaodPhotoLoading, setUpLaodPhotoLoading] = useState(false)
@@ -24,7 +28,7 @@ function App() {
   const [sucMsg, setSucMsg] = useState(false)
   const [title, setTitle] = useState("add title")
   const [allData, setAllData] = useState()
-  const [searchkey, setSearchkey] = useState()
+  const [searchkey, setSearchkey] = useState("")
 
 
 
@@ -38,8 +42,6 @@ function App() {
     try {
       setPageLaoder(true)
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/photos?q=${encodeURIComponent(searchkey)}`)
-
-
 
       if (res.data.message.length !== 0) {
         const myAllPostes = res.data.message.length === 1 ? (
@@ -58,14 +60,18 @@ function App() {
         ) : (
           <div className="columns-2 md:columns-9 gap-4">
             {res.data.message.map((post) => (
-              <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg">
+              <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg" >
                 <img
+                 
                   src={post.photo}
                   className="w-full rounded-lg"
                   alt="postes"
                 />
+                
               </div>
             ))}
+
+        
           </div>
         );
 
@@ -75,6 +81,7 @@ function App() {
 
       }
       setPageLaoder(false)
+      setSearchkey("")
     } catch (error) {
       console.log("serch daata  get error", error.message)
       console.log(searchkey)
@@ -114,6 +121,7 @@ function App() {
                 src={post.photo}
                 className="w-full rounded-lg"
                 alt="postes"
+                 onClick={()=>{console.log(post._id)}}
               />
             </div>
           ))}
@@ -184,7 +192,7 @@ function App() {
 
     setTimeout(() => {
       setSucMsg(false)
-    }, 1200)
+    }, 2000)
 
   }
 
@@ -232,13 +240,23 @@ function App() {
 
 
   function hideserchbar() {
-    searchedData()
-    setSearchBar(false)
-    setPostDiv(false)
+
+    if (searchkey === "") {
+      getData()
+      searchedData()
+      setSearchBar(false)
+      setPostDiv(false)
+    } else {
+      searchedData()
+      setSearchBar(false)
+      setPostDiv(false)
+    }
+
 
   }
 
   function homeBtn() {
+
     getData()
     hideserchbar()
     setSearchBar(false)
@@ -259,59 +277,133 @@ function App() {
   return (
     <>
 
+      <Transition
+
+        show={sucMsg}
+        enter="transition ease duration-500 transform"
+        enterFrom="-translate-y-full opacity-0"
+        enterTo="translate-y-0 opacity-100"
+        leave="transition ease duration-300 transform"
+        leaveFrom="translate-y-0 opacity-100"
+        leaveTo="-translate-y-full opacity-0"
+      >
+        <div className='p-2 px-8 fixed  top-5  left-1/4 md:left-[40%] translate-x-1/2  translate-y-1/2    bg-green-400     z-50  rounded-xl  '>
+          <p className='text-white'>Success</p>
+        </div>
+      </Transition>
 
 
 
-      {sucMsg ? (
-        <>
-          <div className='p-2 px-8 fixed top-4 left-4 transform -translate-x-1/2 -translate-y-1/2   bg-green-400     z-50  rounded-xl animate-slideBounceFade '>
-            <p className='text-white'>Success</p>
-          </div>
-        </>)
-        : (<>
-        </>)}
 
 
 
 
 
       {/* navbar  */}
-      <div className=' justify-between items-center p-3 w-[90%] mx-auto rounded-b-md flex gap-3 fixed ml-[5%] z-40 backdrop-blur-sm bg-white/40'>
 
-        <div className="  z-20  rounded-[10px] w-fit   flex flex-col items-center  justify-around md:justify-center md:gap-4   text-white  font-bold">
-          <div className='flex  flex-row items-center'>
-            <img src="https://res.cloudinary.com/drrj8rl9n/image/upload/v1754624015/ybpwgwjjksdsebgon2co.jpg" className='w-11 rounded-full p-1' alt="logo" />
-          </div>
-        </div>
-        <div className='flex'>
+      <div className='
+   // phone
+       bg-white
+         fixed 
+         z-30 
+         w-full 
+         flex 
+         justify-between
+         px-5
+         items-center 
+         h-14
+         top-0
 
-          <div
+     //  desktop
+        md:hidden
+       '>
 
-            className='gap-7 p-3 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center px-3 rounded-full text-white'>
-            <FaHome className=' cursor-pointer' onClick={homeBtn} />
-            <FaSearch className={searchBar ? "animate-bounce" : "animate-none"} onClick={serchBtn} />
-            <HiPlus className={postDiv ? "animate-bounce cursor-pointer" : "animate-none cursor-pointer"} onClick={newPostBtn} />
-
-          </div>
-        </div>
-
-        <div className=' flex items-center px-3 rounded-full text-white'>
-
-          <button className='p-2 flex items-center '>
-            <CiLogin />
-            Login
-          </button>
-        </div>
+        <img src="https://i.pinimg.com/736x/6e/ad/91/6ead912ceb43c93b8e189d1eb802845f.jpg" className='w-11 rounded-full p-1' alt="logo" />
+        {!menuOption ? (<><i className="fa-solid fa-bars"
+          onClick={() => setMenuOption(!menuOption)}
+        ></i></>) :
+          (<>
+            <i className="fa-solid fa-xmark"
+              onClick={() => setMenuOption(!menuOption)}
+            ></i>
+          </>)}
 
       </div>
+
+
+
+
+
+
+      <div className='
+   // phone
+       bg-white
+         fixed 
+         z-30 
+         w-full 
+         flex 
+         justify-around
+         items-center 
+         h-16
+         bottom-0
+
+     //  desktop
+           md:top-6
+          md:bg-gray-200
+          md:w-[50px]
+          md:h-[800px]
+          md:flex 
+          md:items-center
+          md:gap-8
+          md:mt-4 
+          md:justify-start
+          md:flex-col
+       '>
+
+        <FaHome className=' cursor-pointer' onClick={homeBtn} />
+        <HiPlus className={postDiv ? "animate-bounce cursor-pointer" : "animate-none cursor-pointer"} onClick={newPostBtn} />
+        <FaSearch className={searchBar ? "animate-bounce" : "animate-none"} onClick={serchBtn} />
+
+        {/* <button className='bg-gray-700 text-white p-1' onClick={() => setIsOpen(!isOpen)}>ok</button> */}
+
+      </div>
+
+
+      <Transition
+        show={isOpen}
+        enter="transition ease duration-500 transform"
+        enterFrom="-translate-y-full opacity-0"
+        enterTo="translate-y-0 opacity-100"
+        leave="transition ease duration-300 transform"
+        leaveFrom="translate-y-0 opacity-100"
+        leaveTo="-translate-y-full opacity-0"
+      >
+        <div className="fixed inset-x-0 bottom-0 bg-purple-500 z-40 w-[97%] ml-[3%] ">
+          <h1> this is transition </h1>
+        </div>
+      </Transition>
+
+
+
+
 
 
 
       {/* search bar  start */}
 
 
-      {searchBar ? (<>
-        <div className=' text-white p-4 rounded-xl w-[90%] md:w-[70%] backdrop-blur-sm z-40  fixed top-[10%] left-1/2 transform -translate-x-1/2 '>
+
+
+      <Transition
+        show={searchBar}
+        enter="transition ease duration-500 transform"
+        enterFrom="-translate-y-full opacity-0"
+        enterTo="translate-y-0 opacity-100"
+        leave="transition ease duration-200 transform"
+        leaveFrom="translate-y-0 opacity-100"
+        leaveTo="-translate-y-full opacity-0"
+      >
+        <div className=' text-white p-4 min-h-[90%] md:h-fit md:rounded-xl w-full md:w-[70%] bg-gradient-to-br from-blue-900 via-gray-800 to-black z-40  fixed md:top-10 left-1/2 transform -translate-x-1/2 '>
 
           <input
             onChange={(e) => setSearchkey(e.target.value)}
@@ -325,7 +417,9 @@ function App() {
           </button>
 
         </div>
-      </>) : (<></>)}
+      </Transition>
+
+
 
       {/* search bar  end */}
 
@@ -336,8 +430,17 @@ function App() {
 
       {/* uplod new photo section  */}
 
-      {postDiv ? (<>
-        <div className='  fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-[20px]  bg-gradient-to-r from-purple-500 to-pink-500 z-20  w-fit ' >
+
+      <Transition
+        show={postDiv}
+        enter="transition ease duration-500 transform"
+        enterFrom=" opacity-0"
+        enterTo="opacity-100"
+        leave="transition ease duration-200 transform"
+        leaveFrom="translate-y-0 opacity-100"
+        leaveTo="-translate-y-full opacity-0"
+      >
+        <div className='  fixed  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-[20px]  bg-gradient-to-br from-blue-900 via-gray-800 to-black z-20  w-fit ' >
           <div><CiCircleRemove onClick={() => postDiv ? setPostDiv(false) : setPostDiv(true)} className=' cursor-pointer text-white' /></div>
           <div className="flex flex-col items-center justify-center w-full mt-3" >
             <label
@@ -380,6 +483,7 @@ function App() {
           <br />
           <br />
           <button
+            
             onClick={() => {
               postNewPhoto()
               setUpLaodPhotoLoading(true)
@@ -395,8 +499,9 @@ function App() {
 
           </button>
         </div>
+      </Transition>
 
-      </>) : (<></>)}
+
 
 
 
@@ -414,9 +519,15 @@ function App() {
           <PageLaoder />
         </>)
         : (<>
-          <div className=' flex flex-row flex-wrap   absolute  p-5 '   >
+
+
+
+
+          <div className=' flex flex-row flex-wrap  w-[97%] ml-[3%] absolute  p-5 bg-white'   >
+
             {allData}
           </div>
+
         </>)}
 
 
