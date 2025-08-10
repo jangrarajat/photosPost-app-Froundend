@@ -344,12 +344,13 @@ function App() {
          flex 
          justify-around
          items-center 
-         h-16
+         h-14
          bottom-0
 
      //  desktop
-           md:top-6
-          md:bg-gray-200
+           md:top-[-20px]
+           md:pt-4
+         
           md:w-[50px]
           md:h-[800px]
           md:flex 
@@ -361,16 +362,16 @@ function App() {
        '>
         <img src="https://i.pinimg.com/736x/6e/ad/91/6ead912ceb43c93b8e189d1eb802845f.jpg" className='w-11 rounded-full p-1 hidden md:flex' alt="logo" />
         <button
-          className=' w-[20%] h-[90%] flex items-center justify-center'
+          className=' w-[20%] md:w-fit md:h-fit h-[90%] flex items-center justify-center'
           onClick={homeBtn}> <FaHome className=' cursor-pointer' />
         </button>
         <button
-          className=' w-[20%] h-[90%] flex items-center justify-center'
+          className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
           onClick={newPostBtn}>
           <HiPlus className={postDiv ? "animate-bounce cursor-pointer" : "animate-none cursor-pointer"} />
         </button>
         <button
-          className=' w-[20%] h-[90%] flex items-center justify-center'
+          className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
          onClick={serchBtn}>
         <FaSearch className={searchBar ? "animate-bounce" : "animate-none"}  />
         </button>
