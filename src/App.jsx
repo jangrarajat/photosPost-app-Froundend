@@ -372,8 +372,8 @@ function App() {
         </button>
         <button
           className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
-         onClick={serchBtn}>
-        <FaSearch className={searchBar ? "animate-bounce" : "animate-none"}  />
+          onClick={serchBtn}>
+          <FaSearch className={searchBar ? "animate-bounce" : "animate-none"} />
         </button>
 
         {/* <button className='bg-gray-700 text-white p-1' onClick={() => setIsOpen(!isOpen)}>ok</button> */}
@@ -535,7 +535,7 @@ function App() {
 
 
 
-          <div className=' flex flex-row flex-wrap  w-[97%] ml-[3%] absolute  p-5 bg-white'   >
+          <div className='  md:w-[97%] md:ml-[3%] absolute  md:p-5 p-1 bg-white'   >
 
             {allData}
           </div>
