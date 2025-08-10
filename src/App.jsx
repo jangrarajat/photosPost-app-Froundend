@@ -114,7 +114,7 @@ function App() {
           ))}
         </div>
       ) : (
-        <div className="columns-3 md:columns-9 gap-4">
+        <div className="columns-2 md:columns-9 gap-4">
           {data.map((post) => (
             <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg">
               <img
