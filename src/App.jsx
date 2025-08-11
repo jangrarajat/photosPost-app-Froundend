@@ -250,7 +250,6 @@ function App() {
       setPostDiv(false)
     }
 
-
   }
 
   function homeBtn() {
@@ -287,7 +286,7 @@ function App() {
         leaveFrom="translate-y-0 opacity-100"
         leaveTo="-translate-y-full opacity-0"
       >
-        <div className='p-2 px-8 fixed  top-5  left-1/4 md:left-[40%] translate-x-1/2  translate-y-1/2    bg-green-400     z-50  rounded-xl  '>
+        <div className='p-2 px-8 fixed  top-5  left-1/4 md:left-[40%] translate-x-1/2 translate-y-1/2 bg-green-400 z-50  rounded-xl  '>
           <p className='text-white'>Success</p>
         </div>
       </Transition>
@@ -318,14 +317,13 @@ function App() {
         md:hidden
        '>
 
-        <img src="https://i.pinimg.com/736x/6e/ad/91/6ead912ceb43c93b8e189d1eb802845f.jpg" className='w-11 rounded-full p-1' alt="logo" />
-        {!menuOption ? (<><i className="fa-solid fa-bars"
-          onClick={() => setMenuOption(!menuOption)}
-        ></i></>) :
+        <img src="https://res.cloudinary.com/drrj8rl9n/image/upload/v1754898987/f3x04aahadg6b6p0tkzz.png" className='w-16 rounded-full p-1' alt="logo" />
+        {!menuOption ? (<>
+          <button className=' px-3 py-1'><i className="fa-solid fa-bars" onClick={() => setMenuOption(!menuOption)}></i>
+          </button>
+        </>) :
           (<>
-            <i className="fa-solid fa-xmark"
-              onClick={() => setMenuOption(!menuOption)}
-            ></i>
+            <button className=' px-3 py-1'> <i className="fa-solid fa-xmark" onClick={() => setMenuOption(!menuOption)}></i></button>
           </>)}
 
       </div>
@@ -360,7 +358,7 @@ function App() {
           md:justify-start
           md:flex-col
        '>
-        <img src="https://i.pinimg.com/736x/6e/ad/91/6ead912ceb43c93b8e189d1eb802845f.jpg" className='w-11 rounded-full p-1 hidden md:flex' alt="logo" />
+        <img src="https://res.cloudinary.com/drrj8rl9n/image/upload/v1754898987/f3x04aahadg6b6p0tkzz.png" className='w-16 rounded-full p-1 hidden md:flex' alt="logo" />
         <button
           className=' w-[20%] md:w-fit md:h-fit h-[90%] flex items-center justify-center'
           onClick={homeBtn}> <FaHome className=' cursor-pointer' />
@@ -368,12 +366,12 @@ function App() {
         <button
           className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
           onClick={newPostBtn}>
-          <HiPlus className={postDiv ? "animate-bounce cursor-pointer" : "animate-none cursor-pointer"} />
+          <HiPlus className={postDiv ? " cursor-pointer" : "animate-none cursor-pointer"} />
         </button>
         <button
           className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
           onClick={serchBtn}>
-          <FaSearch className={searchBar ? "animate-bounce" : "animate-none"} />
+          <FaSearch className={searchBar ? "animate-none" : "animate-none"} />
         </button>
 
         {/* <button className='bg-gray-700 text-white p-1' onClick={() => setIsOpen(!isOpen)}>ok</button> */}
@@ -384,7 +382,7 @@ function App() {
       <Transition
         show={isOpen}
         enter="transition ease duration-500 transform"
-        enterFrom="-translate-y-full opacity-0"
+        enterFrom="translate-y-full opacity-0"
         enterTo="translate-y-0 opacity-100"
         leave="transition ease duration-300 transform"
         leaveFrom="translate-y-0 opacity-100"
@@ -411,16 +409,24 @@ function App() {
         leaveFrom="translate-y-0 opacity-100"
         leaveTo="-translate-y-full opacity-0"
       >
-        <div className=' text-white p-4 h-[87%]  flex flex-col items-center justify-center   w-full   backdrop-blur z-20  fixed top-12 left-1/2 transform -translate-x-1/2 '>
-
-
-          <p className='font-extralight my-5 cursor-pointer'>About</p>
-          <p className='font-extralight my-5 cursor-pointer'>Login</p>
+        <div className=' text-black p-4 h-[100%]  flex flex-col items-center justify-start   w-full   bg-white z-20  fixed top-12 left-1/2 transform -translate-x-1/2 '>
+          <h3 class="gradient-text"><b>RM Imagen</b></h3>
+          <div className='nameLine h-1 w-[100%]'></div>
+          <p className='font-extralight my-5 cursor-pointer px-10 py-1'>About</p>
+          <div className='nameLine h-[1px] w-[20%]'></div>
+          <p className='font-extralight my-5 cursor-pointer px-10 py-1'>Contect</p>
+          <div className='nameLine h-[1px] w-[40%]'></div>
+          <p className='font-extralight my-5 cursor-pointer  px-10 py-1'>Login</p>
+          <div className='nameLine h-[1px] w-[60%]'></div>
         </div>
       </Transition>
 
 
       {/* search bar  start */}
+
+
+
+
 
 
 
@@ -434,14 +440,15 @@ function App() {
         leaveFrom="translate-y-0 opacity-100"
         leaveTo="-translate-y-full opacity-0"
       >
-        <div className=' text-white p-4 min-h-[95%] md:h-fit md:rounded-xl w-full md:w-[70%]  backdrop-blur z-40  fixed md:top-10 left-1/2 transform -translate-x-1/2 '>
+        <div className=' text-black p-4 min-h-[95%] md:h-fit md:rounded-xl w-full md:w-[97%] md:ml-[3%]  bg-white z-20  fixed  '>
 
           <input
             onChange={(e) => setSearchkey(e.target.value)}
-            type="text" placeholder='Search your think' className=' font-extralight  px-4 mt-10 w-full flex flex-col bg-white/30  h-12 rounded-md ' />
+            type="text" placeholder='Search your think'
+            className=' font-extralight  px-4 mt-20 w-full flex flex-col bg-white/30  h-12 rounded-md ' />
           <button
             onClick={hideserchbar}
-            className=' w-full rounded-lg mt-5 p-2 bg-white/40 flex  items-center justify-center text-gray-600'
+            className='serchBtn w-full rounded-lg mt-5 p-2 bg-white/40 flex  items-center justify-center text-gray-600'
           >
             <FaSearch />
             search
@@ -461,22 +468,21 @@ function App() {
 
       {/* uplod new photo section  */}
 
-
       <Transition
         show={postDiv}
         enter="transition ease duration-500 transform"
-        enterFrom=" opacity-0"
-        enterTo="opacity-100"
+        enterFrom="-translate-y-full opacity-0"
+        enterTo="translate-y-0 opacity-100"
         leave="transition ease duration-200 transform"
         leaveFrom="translate-y-0 opacity-100"
         leaveTo="-translate-y-full opacity-0"
       >
-        <div className='  fixed  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-[20px]  bg-gradient-to-br from-blue-900 via-gray-800 to-black z-20  w-fit ' >
-          <div><CiCircleRemove onClick={() => postDiv ? setPostDiv(false) : setPostDiv(true)} className=' cursor-pointer text-white' /></div>
-          <div className="flex flex-col items-center justify-center w-full mt-3" >
+        <div className=' text-black p-4 min-h-[95%] md:h-fit md:rounded-xl w-full md:w-[97%] md:ml-[3%]  bg-white z-20  fixed  '>
+
+          <div className='   mt-20 w-full h-full flex flex-col justify-center items-center '>
             <label
               htmlFor="fileupload"
-              className="  flex flex-col items-center justify-center w-full max-w-sm h-20 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border-gray-300 dark:border-gray-600 transition"
+              className="flex flex-col items-center justify-center w-full max-w-sm h-[300px] border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border-gray-300 dark:border-gray-600 transition"
             >
 
               <h2 className='flex flex-col items-center gap-2 '
@@ -510,27 +516,32 @@ function App() {
 
             </label>
 
+
+            <br />
+            <br />
+            <button
+
+              onClick={() => {
+                postNewPhoto()
+                setUpLaodPhotoLoading(true)
+              }}
+              className='flex flex-row gap-5 justify-center items-center mt-3 bg-green-500 w-[82%] rounded-lg p-2 md:bg-green-400'
+            >
+              {upLaodPhotoLoading ? (
+                <>
+                  <div className='h-10 w-10  rounded-full border-4 border-white border-b-gray-400 animate-spin'>
+                  </div>
+                  <p className='font-extralight'>uplaoding pic...</p>
+                </>) : (<><p className='font-extralight text-white'> upload photo</p></>)}
+
+            </button>
           </div>
-          <br />
-          <br />
-          <button
 
-            onClick={() => {
-              postNewPhoto()
-              setUpLaodPhotoLoading(true)
-            }}
-            className='flex flex-row gap-5 justify-center items-center mt-3 bg-green-500 w-80 rounded-lg p-2 md:bg-green-400'
-          >
-            {upLaodPhotoLoading ? (
-              <>
-                <div className='h-10 w-10  rounded-full border-4 border-white border-b-gray-400 animate-spin'>
-                </div>
-                <p className='font-extralight'>uplaoding pic...</p>
-              </>) : (<><p className='font-extralight text-white'> upload photo</p></>)}
-
-          </button>
         </div>
+
       </Transition>
+
+
 
 
 
@@ -561,7 +572,7 @@ function App() {
 
 
 
-          <div className='  md:w-[97%] md:ml-[3%] absolute top-12 md:p-5 p-1 bg-white'   >
+          <div className='  md:w-[97%] md:ml-[3%] absolute top-12 md:top-0 md:p-5 p-1 bg-white'   >
 
             {allData}
           </div>

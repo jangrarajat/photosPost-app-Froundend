@@ -6,8 +6,8 @@
 }
 
 .ball {
-  width: 22px;
-  height: 22px;
+  width:  20px;
+  height: 20px;
   border-radius: 11px;
   margin: 0 10px;
   animation: 2s bounce ease infinite;
@@ -20,4 +20,34 @@
 
 @keyframes bounce {  
   50% { transform: translateY(25px); }
+}
+
+input{
+  border: 1px solid gray;
+}
+
+.serchBtn{
+  background-color: #4285F5;
+}
+
+.gradient-text{
+  display: inline-block;           /* zaroori nahi lekin safer hai */
+  font-weight: 700;
+  font-size: 32px;
+
+  /* gradient (apne logo ke colors yahan daalo) */
+  background: linear-gradient(90deg, #0072ff 0%, #8e2de2 100%);
+
+  /* Chrome / Safari / Edge (Blink & WebKit) */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* unprefixed for browsers that support it */
+  background-clip: text;
+  color: transparent; /* fallback for some browsers (and for accessibility) */
+}
+
+.nameLine{
+    background: linear-gradient(90deg, #0072ff 0%, #8e2de2 100%);
+    border-radius: 10px;
 }
