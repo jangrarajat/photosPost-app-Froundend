@@ -409,15 +409,25 @@ function App() {
         leaveFrom="translate-y-0 opacity-100"
         leaveTo="-translate-y-full opacity-0"
       >
-        <div className=' text-black p-4 h-[100%]  flex flex-col items-center justify-start   w-full   bg-white z-20  fixed top-12 left-1/2 transform -translate-x-1/2 '>
+        <div className=' text-black p-4 h-[100%]  flex flex-col items-start justify-start   w-full   bg-white z-20  fixed top-12 left-1/2 transform -translate-x-1/2 '>
           <h3 class="gradient-text"><b>RM Imagen</b></h3>
           <div className='nameLine h-1 w-[100%]'></div>
-          <p className='font-extralight my-5 cursor-pointer px-10 py-1'>About</p>
-          <div className='nameLine h-[1px] w-[20%]'></div>
-          <p className='font-extralight my-5 cursor-pointer px-10 py-1'>Contect</p>
-          <div className='nameLine h-[1px] w-[40%]'></div>
-          <p className='font-extralight my-5 cursor-pointer  px-10 py-1'>Login</p>
-          <div className='nameLine h-[1px] w-[60%]'></div>
+          <p className='font-extralight my-5 cursor-pointer px-10 py-1'>
+           <i class="fa-solid fa-circle-user"></i>
+           <span> About</span>
+          </p>
+          <div className='nameLine h-[1px] w-[100%]'></div>
+          <p className='font-extralight my-5 cursor-pointer px-10 py-1'>
+               <i class="fa-solid fa-envelope"></i>
+           
+            <span>  Contect</span>
+          </p>
+          <div className='nameLine h-[1px] w-[100%]'></div>
+          <p className='font-extralight my-5 cursor-pointer px-10 py-1 '>
+            <i class="fa-solid fa-right-to-bracket "></i>
+            <span>Login</span>
+          </p>
+          <div className='nameLine h-[1px] w-[100%]'></div>
         </div>
       </Transition>
 
@@ -495,7 +505,7 @@ function App() {
                     </div>
                   </>) : (
                   <>
-                    <p className='font-extralight text-white'>Select Image </p>
+                    <p className='font-extralight text-white'><i class="fa-solid fa-image"></i>Select Image </p>
                     <BsCloudUploadFill className='text-white' />
                   </>)}
               </h2>
@@ -525,7 +535,7 @@ function App() {
                 postNewPhoto()
                 setUpLaodPhotoLoading(true)
               }}
-              className='flex flex-row gap-5 justify-center items-center mt-3 bg-green-500 w-[82%] rounded-lg p-2 md:bg-green-400'
+              className='flex flex-row gap-5 justify-center items-center mt-3 bg-green-500 w-[98%] md:w-[82%] rounded-lg p-2 md:bg-green-400'
             >
               {upLaodPhotoLoading ? (
                 <>
