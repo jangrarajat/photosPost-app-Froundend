@@ -8,7 +8,6 @@ import PageLaoder from "./Components/PageLaoder"
 import { Transition } from '@headlessui/react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import LineLaoder from './Components/lineLaoder';
-
 import './App.css'
 
 import axios from 'axios';
