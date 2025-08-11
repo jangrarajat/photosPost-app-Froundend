@@ -7,7 +7,6 @@ import { FaSearch } from "react-icons/fa";
 import PageLaoder from "./Components/PageLaoder"
 import { Transition } from '@headlessui/react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import LineLaoder from './Components/lineLaoder';
 import './App.css'
 
 import axios from 'axios';
@@ -547,7 +546,14 @@ function App() {
 
       {pageLaoder ?
         (<>
-          <LineLaoder />
+          <div className='w-full h-[100%] flex justify-center items-center bg-transparent  fixed z-50'>
+            <div className="wrapper">
+              <div className="blue ball"></div>
+              <div className="red ball"></div>
+              <div className="yellow ball"></div>
+              <div className="green ball"></div>
+            </div>
+          </div>
           <PageLaoder />
         </>)
         : (<>
