@@ -319,11 +319,14 @@ function App() {
 
         <img src="https://res.cloudinary.com/drrj8rl9n/image/upload/v1754898987/f3x04aahadg6b6p0tkzz.png" className='w-16 rounded-full p-1' alt="logo" />
         {!menuOption ? (<>
-          <button className=' px-3 py-1'><i className="fa-solid fa-bars" onClick={() => setMenuOption(!menuOption)}></i>
+          <button className=' px-3 py-1'>
+            <i className="fa-solid fa-bars fa-xl" onClick={() => setMenuOption(!menuOption)}></i>
           </button>
         </>) :
           (<>
-            <button className=' px-3 py-1'> <i className="fa-solid fa-xmark" onClick={() => setMenuOption(!menuOption)}></i></button>
+            <button className=' px-3 py-1'>
+              <i className="fa-solid fa-xmark fa-xl" onClick={() => setMenuOption(!menuOption)}></i>
+              </button>
           </>)}
 
       </div>
@@ -361,17 +364,18 @@ function App() {
         <img src="https://res.cloudinary.com/drrj8rl9n/image/upload/v1754898987/f3x04aahadg6b6p0tkzz.png" className='w-16 rounded-full p-1 hidden md:flex' alt="logo" />
         <button
           className=' w-[20%] md:w-fit md:h-fit h-[90%] flex items-center justify-center'
-          onClick={homeBtn}> <FaHome className=' cursor-pointer' />
+          onClick={homeBtn}>
+          <i class="fa-solid fa-house fa-xl"></i>
         </button>
         <button
           className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
           onClick={newPostBtn}>
-          <HiPlus className={postDiv ? " cursor-pointer" : "animate-none cursor-pointer"} />
+          <i class="fa-solid fa-plus fa-2xl"></i>
         </button>
         <button
           className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
           onClick={serchBtn}>
-          <FaSearch className={searchBar ? "animate-none" : "animate-none"} />
+          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
         </button>
 
         {/* <button className='bg-gray-700 text-white p-1' onClick={() => setIsOpen(!isOpen)}>ok</button> */}
@@ -412,18 +416,18 @@ function App() {
         <div className=' text-black p-4 h-[100%]  flex flex-col items-start justify-start   w-full   bg-white z-20  fixed top-12 left-1/2 transform -translate-x-1/2 '>
           <h3 class="gradient-text"><b>RM Imagen</b></h3>
           <div className='nameLine h-1 w-[100%]'></div>
-          <p className='font-extralight my-5 cursor-pointer px-10 py-1'>
-           <i class="fa-solid fa-circle-user"></i>
-           <span> About</span>
+          <p className='font-extralight my-5 cursor-pointer px-10 '>
+            <i class="fa-solid fa-circle-user"></i>
+            <span> About</span>
           </p>
           <div className='nameLine h-[1px] w-[100%]'></div>
-          <p className='font-extralight my-5 cursor-pointer px-10 py-1'>
-               <i class="fa-solid fa-envelope"></i>
-           
+          <p className='font-extralight my-5 cursor-pointer px-10 '>
+            <i class="fa-solid fa-envelope"></i>
+
             <span>  Contect</span>
           </p>
           <div className='nameLine h-[1px] w-[100%]'></div>
-          <p className='font-extralight my-5 cursor-pointer px-10 py-1 '>
+          <p className='font-extralight my-5 cursor-pointer px-10  '>
             <i class="fa-solid fa-right-to-bracket "></i>
             <span>Login</span>
           </p>
