@@ -365,17 +365,17 @@ function App() {
         <button
           className=' w-[20%] md:w-fit md:h-fit h-[90%] flex items-center justify-center'
           onClick={homeBtn}>
-          <i class="fa-solid fa-house fa-xl"></i>
+          <i className="fa-solid fa-house fa-xl"></i>
         </button>
         <button
           className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
           onClick={newPostBtn}>
-          <i class="fa-solid fa-plus fa-2xl"></i>
+          <i className="fa-solid fa-plus fa-2xl"></i>
         </button>
         <button
           className=' w-[20%] h-[90%] md:w-fit md:h-fit flex items-center justify-center'
           onClick={serchBtn}>
-          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+          <i className="fa-solid fa-magnifying-glass fa-xl"></i>
         </button>
 
         {/* <button className='bg-gray-700 text-white p-1' onClick={() => setIsOpen(!isOpen)}>ok</button> */}
@@ -414,21 +414,21 @@ function App() {
         leaveTo="-translate-y-full opacity-0"
       >
         <div className=' text-black p-4 h-[100%]  flex flex-col items-start justify-start   w-full   bg-white z-20  fixed top-12 left-1/2 transform -translate-x-1/2 '>
-          <h3 class="gradient-text"><b>RM Imagen</b></h3>
+          <h3 className="gradient-text"><b>RM Imagen</b></h3>
           <div className='nameLine h-1 w-[100%]'></div>
           <p className='font-extralight my-5 cursor-pointer px-10 '>
-            <i class="fa-solid fa-circle-user"></i>
+            <i className="fa-solid fa-circle-user"></i>
             <span> About</span>
           </p>
           <div className='nameLine h-[1px] w-[100%]'></div>
           <p className='font-extralight my-5 cursor-pointer px-10 '>
-            <i class="fa-solid fa-envelope"></i>
+            <i className="fa-solid fa-envelope"></i>
 
             <span>  Contect</span>
           </p>
           <div className='nameLine h-[1px] w-[100%]'></div>
           <p className='font-extralight my-5 cursor-pointer px-10  '>
-            <i class="fa-solid fa-right-to-bracket "></i>
+            <i className="fa-solid fa-right-to-bracket "></i>
             <span>Login</span>
           </p>
           <div className='nameLine h-[1px] w-[100%]'></div>
@@ -509,7 +509,7 @@ function App() {
                     </div>
                   </>) : (
                   <>
-                    <p className='font-extralight text-white'><i class="fa-solid fa-image"></i>Select Image </p>
+                    <p className='font-extralight text-white'><i className="fa-solid fa-image"></i>Select Image </p>
                     <BsCloudUploadFill className='text-white' />
                   </>)}
               </h2>
