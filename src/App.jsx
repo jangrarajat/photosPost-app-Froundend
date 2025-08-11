@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import PageLaoder from "./Components/PageLaoder"
 import { Transition } from '@headlessui/react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import LineLaoder from './Components/lineLaoder';
 
 import './App.css'
 
@@ -277,6 +277,8 @@ function App() {
   return (
     <>
 
+
+
       <Transition
 
         show={sucMsg}
@@ -413,7 +415,7 @@ function App() {
       >
         <div className=' text-white p-4 h-[87%]  flex flex-col items-center justify-center   w-full   backdrop-blur z-20  fixed top-12 left-1/2 transform -translate-x-1/2 '>
 
-         
+
           <p className='font-extralight my-5 cursor-pointer'>About</p>
           <p className='font-extralight my-5 cursor-pointer'>Login</p>
         </div>
@@ -546,7 +548,7 @@ function App() {
 
       {pageLaoder ?
         (<>
-
+          <LineLaoder />
           <PageLaoder />
         </>)
         : (<>
