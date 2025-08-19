@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
-import { HiPlus } from "react-icons/hi";
 import { BsCloudUploadFill } from "react-icons/bs";
-import { CiCircleRemove } from "react-icons/ci";
-import { FaHome } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import PageLaoder from "./Components/PageLaoder"
 import { Transition } from '@headlessui/react';
@@ -13,8 +10,10 @@ import axios from 'axios';
 
 
 
-function App() {
 
+function App() {
+  const [online, setOnline] = useState(false)
+  const [deteailsPage, setDeteailsPage] = useState(false)
   const [menuOption, setMenuOption] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [pageLaoder, setPageLaoder] = useState(false)
@@ -27,6 +26,10 @@ function App() {
   const [title, setTitle] = useState("add title")
   const [allData, setAllData] = useState()
   const [searchkey, setSearchkey] = useState("")
+
+
+
+  // handel online Offline 
 
 
 
@@ -47,6 +50,7 @@ function App() {
             {res.data.message.map((post) => (
               <div key={post._id} className=' w-fit   rounded-lg'>
                 <img
+                  onError={(e) => e.target.src = "https://res.cloudinary.com/drrj8rl9n/image/upload/v1754619698/qa4y0bnl6lxdgvnbbgrp.jpg"}
                   src={post.photo}
                   className="rounded-xl w-full "
                   alt="postes"
@@ -60,7 +64,7 @@ function App() {
             {res.data.message.map((post) => (
               <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg" >
                 <img
-
+                  onError={(e) => e.target.src = "/fallback-image.png"}
                   src={post.photo}
                   className="w-full rounded-lg"
                   alt="postes"
@@ -98,6 +102,11 @@ function App() {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user`)
       const data = await res.json();
 
+
+      // console.log(json.stringify(res, null , 2))
+
+
+
       const myAllPostes = data.length === 1 ? (
         <div className="w-full">
           {data.map((post) => (
@@ -106,26 +115,31 @@ function App() {
                 src={post.photo}
                 className="rounded-xl w-full "
                 alt="postes"
+                onError={(e) => e.target.src = "/fallback-image.png"}
               />
               <div><p className='text-white font-extralight'>{post.title}</p></div>
             </div>
           ))}
         </div>
-      ) : (
-        <div className="columns-2 md:columns-9 gap-4">
-          {data.map((post) => (
-            <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg">
-              <img
-                src={post.photo}
-                className="w-full rounded-lg"
-                alt="postes"
-                onClick={() => { console.log(post._id) }}
-              />
-            </div>
-          ))}
-        </div>
 
-      );
+      )
+
+        : (
+          <div className="columns-2 md:columns-9 gap-4">
+            {data.map((post) => (
+              <div key={post._id} className="mb-2 break-inside-avoid   rounded-lg">
+                <img
+                  src={post.photo}
+                  className="w-full rounded-lg"
+                  alt="postes"
+                  onClick={() => setDeteailsPage(true)}
+                  onError={(e) => e.target.src = "/fallback-image.png"}
+                />
+              </div>
+            ))}
+          </div>
+
+        );
       setPageLaoder(false)
       setAllData(myAllPostes)
       // console.log(process.env.REACT_APP_API_URL)
@@ -270,9 +284,39 @@ function App() {
     setSearchBar(false)
   }
 
-
+  // deteailsPage
+  // setDeteailsPage
   return (
     <>
+
+      {/* details page  */}
+
+      <Transition
+        show={deteailsPage}
+        enter="transition ease duration-500 transform"
+        enterFrom="-translate-y-full opacity-0"
+        enterTo="translate-y-0 opacity-100"
+        leave="transition ease duration-200 transform"
+        leaveFrom="translate-y-0 opacity-100"
+        leaveTo="-translate-y-full opacity-0"
+      >
+        <div className=' text-black  border-4 border-gray-700   p-4 min-h-[95%] md:h-fit md:rounded-xl w-full md:w-[97%] md:ml-[3%]  bg-purple-500 z-20 mt-16 md:mt-0 fixed  '>
+
+
+
+
+
+  
+
+
+
+
+
+
+        </div>
+      </Transition>
+
+
 
 
 
@@ -326,7 +370,7 @@ function App() {
           (<>
             <button className=' px-3 py-1'>
               <i className="fa-solid fa-xmark fa-xl" onClick={() => setMenuOption(!menuOption)}></i>
-              </button>
+            </button>
           </>)}
 
       </div>
@@ -356,7 +400,7 @@ function App() {
           md:h-[800px]
           md:flex 
           md:items-center
-          md:gap-8
+          md:gap-20
           md:mt-4 
           md:justify-start
           md:flex-col
@@ -539,7 +583,7 @@ function App() {
                 postNewPhoto()
                 setUpLaodPhotoLoading(true)
               }}
-              className='flex flex-row gap-5 justify-center items-center mt-3 bg-green-500 w-[98%] md:w-[82%] rounded-lg p-2 md:bg-green-400'
+              className='flex flex-row gap-5 justify-center items-center mt-3 bg-green-500 w-[98%] md:w-80 rounded-lg p-2 md:bg-green-400'
             >
               {upLaodPhotoLoading ? (
                 <>
